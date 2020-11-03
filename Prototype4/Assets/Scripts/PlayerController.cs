@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     public bool hasPowerup;
     private float powerupStrength = 15f;
     public GameObject powerupIndicator;
+    public SpawnManager spawnManager;
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +33,12 @@ public class PlayerController : MonoBehaviour
 
         //move indicator to ground below player
         powerupIndicator.transform.position = transform.position + new Vector3(0, -0.5f, 0);
+
+        //Player loses if they fall off
+        if (transform.position.y < -10)
+        {
+            spawnManager.gameOver = true;
+        }
     }
 
     private void FixedUpdate()
@@ -54,7 +61,6 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy") && hasPowerup)
         {
-            Debug.Log("!");
             //Get enemey rigidbody
             Rigidbody enemyRB = collision.gameObject.GetComponent<Rigidbody>();
             //set vector3 with direction away from player

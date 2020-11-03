@@ -7,6 +7,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SpawnManager : MonoBehaviour
 {
@@ -15,13 +16,16 @@ public class SpawnManager : MonoBehaviour
     public int enemyCount;
     public int waveNum = 1;
     public GameObject powerupPrefab;
+    public bool gameOver = false;
+    public bool gameWon = false;
+    public UIManager uiManager;
 
     // Start is called before the first frame update
     void Start()
     {
         SpawnEnemyWave(waveNum);
         SpawnPowerup(1);
-
+        Time.timeScale = 1f;
     }
 
     private void SpawnEnemyWave(int numEnemies)
@@ -57,6 +61,30 @@ public class SpawnManager : MonoBehaviour
             waveNum++;
             SpawnEnemyWave(waveNum);
             SpawnPowerup(1);
+        }
+
+        if (waveNum == 11)
+        {
+            gameWon = true;
+            gameOver = true;
+        }
+
+        if (gameOver)
+        {
+            Time.timeScale = 0f;
+            if (gameWon)
+            {
+                uiManager.gameWin.enabled = true;
+            }
+            else
+            {
+                uiManager.gameLose.enabled = true;
+            }
+
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
         }
     }
 
