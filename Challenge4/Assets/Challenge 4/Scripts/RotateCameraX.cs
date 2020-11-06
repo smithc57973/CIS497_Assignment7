@@ -1,10 +1,16 @@
-﻿using System.Collections;
+﻿/*
+ * Chris Smith
+ * Challenge 4
+ * Script for rotating player camera
+ */
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class RotateCameraX : MonoBehaviour
 {
-    private float speed = 200;
+    private float speed = 100;
     public GameObject player;
 
     // Update is called once per frame
