@@ -45,9 +45,6 @@ public class UIManager : MonoBehaviour
 
 
 //To do
-//The enemies never get more difficult – The enemies’ speed should increase in speed by a small amount with every new wave 
-//    Hint - You’ll need to track and increase the enemy speed in SpawnManagerX.cs.Then in EnemyX.cs, reference that speed variable and set it in Start().
-
 //Add loss condition: all enemies in the current wave get through the player goal.
 
     

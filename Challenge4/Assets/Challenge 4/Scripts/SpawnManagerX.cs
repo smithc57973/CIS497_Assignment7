@@ -22,27 +22,32 @@ public class SpawnManagerX : MonoBehaviour
     public int waveCount = 1;
     public float enemySpeed;
 
-    public bool gameOver = false;
-    public bool gameWon = false;
+    public bool gameOver;
+    public bool gameWon;
     public UIManager uiManager;
+    public GameObject player;
 
-    public GameObject player; 
+    private void Start()
+    {
+        gameOver = false;
+        gameWon = false;
+        enemySpeed = 10f;
+    }
 
     // Update is called once per frame
     void Update()
     {
         enemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
-        enemySpeed = waveCount;
-
-        if (enemyCount == 0)
-        {
-            SpawnEnemyWave(waveCount);
-        }
 
         if (waveCount == 12)
         {
             gameWon = true;
             gameOver = true;
+        }
+
+        if (enemyCount == 0)
+        {
+            SpawnEnemyWave(waveCount);
         }
 
         if (gameOver)
@@ -89,8 +94,9 @@ public class SpawnManagerX : MonoBehaviour
         {
             Instantiate(enemyPrefab, GenerateSpawnPosition(), enemyPrefab.transform.rotation);
         }
-
+        
         waveCount++;
+        enemySpeed += 10f;
         ResetPlayerPosition(); // put player back at start
 
     }

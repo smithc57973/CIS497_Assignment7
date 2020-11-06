@@ -19,7 +19,8 @@ public class EnemyX : MonoBehaviour
     void Start()
     {
         enemyRb = GetComponent<Rigidbody>();
-        playerGoal = GameObject.FindGameObjectWithTag("Player");
+        playerGoal = GameObject.FindGameObjectWithTag("PlayerGoal");
+        SMX = GameObject.FindGameObjectWithTag("SpawnManager").GetComponent<SpawnManagerX>();
         speed = SMX.enemySpeed;
     }
 
@@ -41,6 +42,7 @@ public class EnemyX : MonoBehaviour
         else if (other.gameObject.name == "Player Goal")
         {
             Destroy(gameObject);
+            SMX.gameOver = true;
         }
 
     }
